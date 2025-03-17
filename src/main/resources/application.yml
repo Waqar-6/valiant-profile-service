@@ -1,0 +1,27 @@
+#spring.application.name=profile-service
+
+spring:
+  application:
+    name: profile-service # Name of the microservice
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true        # Enable H2 Console for web access
+      path: /h2-console    # Access at http://localhost:8080/h2-console
+  jpa:
+    hibernate:
+      ddl-auto: update     # Automatically update schema for development
+    show-sql: true          # Log SQL queries
+    properties:
+      hibernate:
+        format_sql: true    # Pretty-print the SQL in logs
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG          # Show SQL statements in logs
+        type: TRACE         # Include query parameters in logs
