@@ -21,7 +21,10 @@ spring:
         format_sql: true    # Pretty-print the SQL in logs
 logging:
   level:
-    org:
-      hibernate:
-        SQL: DEBUG          # Show SQL statements in logs
-        type: TRACE         # Include query parameters in logs
+    root: INFO                  # Set the default logging level for the entire app
+    org.hibernate.SQL: DEBUG    # Log SQL statements (already in place)
+    org.hibernate.type: TRACE   # Log SQL parameter values (already in place)
+    com.wfarooq.profile_service: DEBUG # Enable detailed logs for your specific package
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%level] %logger{36} - %msg%n" # Consistent log formatting
+
