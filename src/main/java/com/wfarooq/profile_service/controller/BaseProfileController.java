@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/api/v1/baseProfiles", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(value = "/api/v1/profiles", produces = {MediaType.APPLICATION_JSON_VALUE})
 @Validated
 public class BaseProfileController {
 
@@ -29,7 +29,7 @@ public class BaseProfileController {
         this.profileService = profileService;
     }
 
-    @PostMapping
+    @PostMapping("/baseProfile")
     public ResponseEntity<ResponseDto> createBaseProfile(@Valid @RequestBody CreateBaseProfileRequest request) {
         log.info("create base profile request {}", request);
         profileService.createBaseProfile(request);
