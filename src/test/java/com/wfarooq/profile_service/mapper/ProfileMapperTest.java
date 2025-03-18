@@ -29,6 +29,5 @@ public class ProfileMapperTest {
         assertEquals(baseProfile.getFirstName(), createBaseProfileRequest.firstName());
         assertEquals(baseProfile.getLastName(), createBaseProfileRequest.lastName());
         assertEquals(baseProfile.getProfileType(), createBaseProfileRequest.profileType());
-
     }
 }
