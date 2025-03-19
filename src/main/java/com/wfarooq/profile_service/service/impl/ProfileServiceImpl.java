@@ -1,7 +1,9 @@
 package com.wfarooq.profile_service.service.impl;
 
 import com.wfarooq.profile_service.dto.requests.CreateBaseProfileRequest;
+import com.wfarooq.profile_service.dto.requests.CreateBreederProfileRequest;
 import com.wfarooq.profile_service.entity.BaseProfile;
+import com.wfarooq.profile_service.entity.BreederProfile;
 import com.wfarooq.profile_service.mapper.ProfileMapper;
 import com.wfarooq.profile_service.repository.ProfileRepository;
 import com.wfarooq.profile_service.service.IProfileService;
@@ -21,5 +23,11 @@ public class ProfileServiceImpl implements IProfileService {
     public void createBaseProfile(CreateBaseProfileRequest createBaseProfileRequest) {
         BaseProfile newBaseProfile = ProfileMapper.mapToBaseProfile(createBaseProfileRequest, new BaseProfile());
         profileRepository.save(newBaseProfile);
+    }
+
+    @Override
+    public void createBreederProfile(CreateBreederProfileRequest createBreederProfileRequest) {
+        BreederProfile newBreederProfile = ProfileMapper.mapToBreederProfile(createBreederProfileRequest, new BreederProfile());
+        profileRepository.save(newBreederProfile);
     }
 }
