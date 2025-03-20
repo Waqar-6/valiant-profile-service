@@ -4,6 +4,7 @@ import com.wfarooq.profile_service.constants.ProfileConstants;
 import com.wfarooq.profile_service.dto.requests.CreateNormalUserProfileRequest;
 import com.wfarooq.profile_service.dto.requests.CreateBreederProfileRequest;
 import com.wfarooq.profile_service.dto.response.BaseProfileResponseDto;
+import com.wfarooq.profile_service.dto.response.BreederProfileResponseDto;
 import com.wfarooq.profile_service.dto.response.ResponseDto;
 import com.wfarooq.profile_service.entity.BaseProfile;
 import com.wfarooq.profile_service.service.IProfileService;
@@ -59,5 +60,11 @@ public class ProfileController {
     public ResponseEntity<BaseProfileResponseDto> fetchProfileById (@PathVariable UUID profileId) {
         BaseProfileResponseDto profile = profileService.fetchProfileById(profileId);
         return new ResponseEntity<>(profile, HttpStatus.OK);
+    }
+
+    @GetMapping("/breederProfiles")
+    public ResponseEntity<List<BreederProfileResponseDto>> fetchAlBreederProfiles () {
+        List<BreederProfileResponseDto> profiles = profileService.fetchAllBreeders();
+        return new ResponseEntity<>(profiles, HttpStatus.OK);
     }
 }

@@ -77,4 +77,11 @@ public class ProfileServiceImpl implements IProfileService {
 
        return null;
     }
+
+    @Override
+    public List<BreederProfileResponseDto> fetchAllBreeders() {
+        List<BreederProfile> breederProfiles = breederProfileRepository.findAll();
+        return breederProfiles.stream()
+                .map(profile -> ProfileMapper.mapToBreederProfileResponse(profile, new BreederProfileResponseDto())).toList();
+    }
 }
