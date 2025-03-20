@@ -1,7 +1,11 @@
 package com.wfarooq.profile_service.service.impl;
 
+import com.wfarooq.profile_service.constants.ProfileType;
 import com.wfarooq.profile_service.dto.requests.CreateNormalUserProfileRequest;
 import com.wfarooq.profile_service.dto.requests.CreateBreederProfileRequest;
+import com.wfarooq.profile_service.dto.response.BaseProfileResponseDto;
+import com.wfarooq.profile_service.dto.response.BreederProfileResponseDto;
+import com.wfarooq.profile_service.dto.response.NormalUserProfileResponseDto;
 import com.wfarooq.profile_service.entity.BaseProfile;
 import com.wfarooq.profile_service.entity.BreederProfile;
 import com.wfarooq.profile_service.entity.NormalUserProfile;
@@ -11,6 +15,8 @@ import com.wfarooq.profile_service.repository.BreederProfileRepository;
 import com.wfarooq.profile_service.repository.NormalUserRepository;
 import com.wfarooq.profile_service.service.IProfileService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProfileServiceImpl implements IProfileService {
@@ -36,5 +42,22 @@ public class ProfileServiceImpl implements IProfileService {
     public void createBreederProfile(CreateBreederProfileRequest createBreederProfileRequest) {
         BreederProfile newBreederProfile = ProfileMapper.mapToBreederProfile(createBreederProfileRequest, new BreederProfile());
         breederProfileRepository.save(newBreederProfile);
+    }
+
+    @Override
+    public List<BaseProfileResponseDto> fetchAllProfiles() {
+
+        List<BaseProfile> allProfiles = profileRepository.findAll();
+
+        return allProfiles.stream().map(profile -> {
+            if (profile.getProfileType().equals(ProfileType.NORMAL_USER_PROFILE)) {
+                return ProfileMapper.mapToNormalUserProfileResponse((NormalUserProfile) profile, new NormalUserProfileResponseDto());
+            }
+
+            if (profile.getProfileType().equals(ProfileType.BREEDER_PROFILE)) {
+                return ProfileMapper.mapToBreederProfileResponse((BreederProfile) profile, new BreederProfileResponseDto());
+            }
+            return null;
+        }).toList();
     }
 }

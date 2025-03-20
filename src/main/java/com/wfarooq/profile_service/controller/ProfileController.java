@@ -3,7 +3,9 @@ package com.wfarooq.profile_service.controller;
 import com.wfarooq.profile_service.constants.ProfileConstants;
 import com.wfarooq.profile_service.dto.requests.CreateNormalUserProfileRequest;
 import com.wfarooq.profile_service.dto.requests.CreateBreederProfileRequest;
+import com.wfarooq.profile_service.dto.response.BaseProfileResponseDto;
 import com.wfarooq.profile_service.dto.response.ResponseDto;
+import com.wfarooq.profile_service.entity.BaseProfile;
 import com.wfarooq.profile_service.service.IProfileService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -12,10 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/profiles", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -43,5 +44,11 @@ public class ProfileController {
         profileService.createBreederProfile(request);
         log.info("new Breeder profile created for user {}", request.getFirstName());
         return new ResponseEntity<>(new ResponseDto(ProfileConstants.STATUS_201, ProfileConstants.MESSAGE_201), HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<BaseProfileResponseDto>> fetchAllProfiles () {
+       List<BaseProfileResponseDto> allProfiles = profileService.fetchAllProfiles();
+        return new ResponseEntity<>(allProfiles, HttpStatus.OK);
     }
 }
