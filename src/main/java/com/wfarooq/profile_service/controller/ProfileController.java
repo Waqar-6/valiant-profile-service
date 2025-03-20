@@ -50,27 +50,33 @@ public class ProfileController {
 
     @GetMapping
     public ResponseEntity<List<BaseProfileResponseDto>> fetchAllProfiles () {
-        log.info("request fetching all profiles request endpoint");
-       List<BaseProfileResponseDto> allProfiles = profileService.fetchAllProfiles();
-       log.info("fetched all profiles");
+        log.info("Received request to fetch all profiles");
+        List<BaseProfileResponseDto> allProfiles = profileService.fetchAllProfiles();
+        log.info("Successfully fetched all profiles. Total count: {}", allProfiles.size());
         return new ResponseEntity<>(allProfiles, HttpStatus.OK);
     }
 
     @GetMapping("/{profileId}")
     public ResponseEntity<BaseProfileResponseDto> fetchProfileById (@PathVariable UUID profileId) {
+        log.info("Received request to fetch profile by ID: {}", profileId);
         BaseProfileResponseDto profile = profileService.fetchProfileById(profileId);
+        log.info("Successfully fetched profile: {}", profileId);
         return new ResponseEntity<>(profile, HttpStatus.OK);
     }
 
     @GetMapping("/breederProfiles")
     public ResponseEntity<List<BreederProfileResponseDto>> fetchAllBreederProfiles () {
+        log.info("Received request to fetch all breeder profiles");
         List<BreederProfileResponseDto> profiles = profileService.fetchAllBreeders();
+        log.info("Successfully fetched breeder profiles. Total count: {}", profiles.size());
         return new ResponseEntity<>(profiles, HttpStatus.OK);
     }
 
     @GetMapping("/normalUserProfiles")
     public ResponseEntity<List<NormalUserProfileResponseDto>> fetchAllNormalUserProfiles () {
+        log.info("Received request to fetch all normal user profiles");
         List<NormalUserProfileResponseDto> profiles = profileService.fetchAllNormalUsers();
+        log.info("Successfully fetched normal user profiles. Total count: {}", profiles.size());
         return new ResponseEntity<>(profiles, HttpStatus.OK);
     }
 }
