@@ -84,4 +84,11 @@ public class ProfileServiceImpl implements IProfileService {
         return breederProfiles.stream()
                 .map(profile -> ProfileMapper.mapToBreederProfileResponse(profile, new BreederProfileResponseDto())).toList();
     }
+
+    @Override
+    public List<NormalUserProfileResponseDto> fetchAllNormalUsers() {
+        List<NormalUserProfile> normalUserProfiles = normalUserRepository.findAll();
+        return normalUserProfiles.stream()
+                .map(profile -> ProfileMapper.mapToNormalUserProfileResponse(profile, new NormalUserProfileResponseDto())).toList();
+    }
 }

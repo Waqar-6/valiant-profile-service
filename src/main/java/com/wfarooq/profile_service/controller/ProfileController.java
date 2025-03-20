@@ -5,8 +5,8 @@ import com.wfarooq.profile_service.dto.requests.CreateNormalUserProfileRequest;
 import com.wfarooq.profile_service.dto.requests.CreateBreederProfileRequest;
 import com.wfarooq.profile_service.dto.response.BaseProfileResponseDto;
 import com.wfarooq.profile_service.dto.response.BreederProfileResponseDto;
+import com.wfarooq.profile_service.dto.response.NormalUserProfileResponseDto;
 import com.wfarooq.profile_service.dto.response.ResponseDto;
-import com.wfarooq.profile_service.entity.BaseProfile;
 import com.wfarooq.profile_service.service.IProfileService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -63,8 +63,14 @@ public class ProfileController {
     }
 
     @GetMapping("/breederProfiles")
-    public ResponseEntity<List<BreederProfileResponseDto>> fetchAlBreederProfiles () {
+    public ResponseEntity<List<BreederProfileResponseDto>> fetchAllBreederProfiles () {
         List<BreederProfileResponseDto> profiles = profileService.fetchAllBreeders();
+        return new ResponseEntity<>(profiles, HttpStatus.OK);
+    }
+
+    @GetMapping("/normalUserProfiles")
+    public ResponseEntity<List<NormalUserProfileResponseDto>> fetchAllNormalUserProfiles () {
+        List<NormalUserProfileResponseDto> profiles = profileService.fetchAllNormalUsers();
         return new ResponseEntity<>(profiles, HttpStatus.OK);
     }
 }
