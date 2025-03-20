@@ -6,6 +6,7 @@ import com.wfarooq.profile_service.dto.response.BaseProfileResponseDto;
 import com.wfarooq.profile_service.entity.BaseProfile;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface IProfileService {
 
@@ -14,4 +15,5 @@ public interface IProfileService {
     void createBreederProfile (CreateBreederProfileRequest createBreederProfileRequest);
 
     List<BaseProfileResponseDto> fetchAllProfiles ();
+    BaseProfileResponseDto fetchProfileById (UUID profileId);
 }

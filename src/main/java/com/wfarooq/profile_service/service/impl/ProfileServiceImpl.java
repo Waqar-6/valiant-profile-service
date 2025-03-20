@@ -9,6 +9,7 @@ import com.wfarooq.profile_service.dto.response.NormalUserProfileResponseDto;
 import com.wfarooq.profile_service.entity.BaseProfile;
 import com.wfarooq.profile_service.entity.BreederProfile;
 import com.wfarooq.profile_service.entity.NormalUserProfile;
+import com.wfarooq.profile_service.exception.ResourceNotFoundException;
 import com.wfarooq.profile_service.mapper.ProfileMapper;
 import com.wfarooq.profile_service.repository.BaseProfileRepository;
 import com.wfarooq.profile_service.repository.BreederProfileRepository;
@@ -17,6 +18,7 @@ import com.wfarooq.profile_service.service.IProfileService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ProfileServiceImpl implements IProfileService {
@@ -59,5 +61,20 @@ public class ProfileServiceImpl implements IProfileService {
             }
             return null;
         }).toList();
+    }
+
+    @Override
+    public BaseProfileResponseDto fetchProfileById(UUID profileId) {
+       BaseProfile profile = profileRepository.findById(profileId).orElseThrow(() -> new ResourceNotFoundException("Profile", "id", profileId.toString()));
+
+       if (profile.getProfileType().equals(ProfileType.NORMAL_USER_PROFILE)) {
+           return ProfileMapper.mapToNormalUserProfileResponse((NormalUserProfile) profile, new NormalUserProfileResponseDto());
+       }
+
+        if (profile.getProfileType().equals(ProfileType.BREEDER_PROFILE)) {
+            return ProfileMapper.mapToBreederProfileResponse((BreederProfile) profile, new BreederProfileResponseDto());
+        }
+
+       return null;
     }
 }

@@ -17,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/api/v1/profiles", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -48,7 +49,15 @@ public class ProfileController {
 
     @GetMapping
     public ResponseEntity<List<BaseProfileResponseDto>> fetchAllProfiles () {
+        log.info("request fetching all profiles request endpoint");
        List<BaseProfileResponseDto> allProfiles = profileService.fetchAllProfiles();
+       log.info("fetched all profiles");
         return new ResponseEntity<>(allProfiles, HttpStatus.OK);
+    }
+
+    @GetMapping("/{profileId}")
+    public ResponseEntity<BaseProfileResponseDto> fetchProfileById (@PathVariable UUID profileId) {
+        BaseProfileResponseDto profile = profileService.fetchProfileById(profileId);
+        return new ResponseEntity<>(profile, HttpStatus.OK);
     }
 }
