@@ -2,7 +2,7 @@ package com.wfarooq.profile_service.dto.requests;
 
 import com.wfarooq.profile_service.constants.ProfileType;
 
-public class CreateBreederProfileRequest extends CreateBaseProfileRequest {
+public class CreateBreederProfileRequest extends CreateNormalUserProfileRequest {
     private String kennelName;
     private String website;
 

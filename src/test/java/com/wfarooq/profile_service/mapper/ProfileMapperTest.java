@@ -1,33 +1,33 @@
 package com.wfarooq.profile_service.mapper;
 
 import com.wfarooq.profile_service.constants.ProfileType;
-import com.wfarooq.profile_service.dto.requests.CreateBaseProfileRequest;
-import com.wfarooq.profile_service.entity.BaseProfile;
+import com.wfarooq.profile_service.dto.requests.CreateNormalUserProfileRequest;
+import com.wfarooq.profile_service.entity.NormalUserProfile;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProfileMapperTest {
 
     @Test
     @DisplayName(value = "test mapToBaseProfile")
-    void whenGivenCreateBaseProfileRequest_ShouldReturnBaseProfileEntity () {
+    void whenGivenCreateNormalUserProfileRequest_ShouldReturnNormalUserProfileEntity () {
         UUID id = UUID.randomUUID();
-        CreateBaseProfileRequest createBaseProfileRequest = new CreateBaseProfileRequest(
-                "Pathan", "Khan", "I am Pathan Hello", ProfileType.BASE_PROFILE
+        CreateNormalUserProfileRequest createNormalUserProfileRequest = new CreateNormalUserProfileRequest(
+                "Pathan", "Khan", "I am Pathan Hello", ProfileType.NORMAL_USER_PROFILE
         );
 
-        BaseProfile baseProfile = new BaseProfile();
-        baseProfile.setId(id);
+        NormalUserProfile normalUserProfile = new NormalUserProfile();
+        normalUserProfile.setId(id);
 
-        ProfileMapper.mapToBaseProfile(createBaseProfileRequest, baseProfile);
+        ProfileMapper.mapToNormalUserProfile(createNormalUserProfileRequest, normalUserProfile);
 
-        assertEquals(baseProfile.getId(), id);
-        assertEquals(baseProfile.getFirstName(), createBaseProfileRequest.getFirstName());
-        assertEquals(baseProfile.getLastName(), createBaseProfileRequest.getLastName());
-        assertEquals(baseProfile.getProfileType(), createBaseProfileRequest.getProfileType());
+        assertEquals(normalUserProfile.getId(), id);
+        assertEquals(normalUserProfile.getFirstName(), createNormalUserProfileRequest.getFirstName());
+        assertEquals(normalUserProfile.getLastName(), createNormalUserProfileRequest.getLastName());
+        assertEquals(normalUserProfile.getProfileType(), createNormalUserProfileRequest.getProfileType());
     }
 }

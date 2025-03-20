@@ -1,7 +1,7 @@
 package com.wfarooq.profile_service.controller;
 
 import com.wfarooq.profile_service.constants.ProfileConstants;
-import com.wfarooq.profile_service.dto.requests.CreateBaseProfileRequest;
+import com.wfarooq.profile_service.dto.requests.CreateNormalUserProfileRequest;
 import com.wfarooq.profile_service.dto.requests.CreateBreederProfileRequest;
 import com.wfarooq.profile_service.dto.response.ResponseDto;
 import com.wfarooq.profile_service.service.IProfileService;
@@ -29,11 +29,11 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
-    @PostMapping("/baseProfile")
-    public ResponseEntity<ResponseDto> createBaseProfile(@Valid @RequestBody CreateBaseProfileRequest request) {
-        log.info("create base profile request {}", request);
-        profileService.createBaseProfile(request);
-        log.info("new base profile created for user {}", request.getFirstName());
+    @PostMapping("/normalUserProfile")
+    public ResponseEntity<ResponseDto> createBaseProfile(@Valid @RequestBody CreateNormalUserProfileRequest request) {
+        log.info("create normal user profile request {}", request);
+        profileService.createNormalUserProfile(request);
+        log.info("new normal user profile created for user {}", request.getFirstName());
         return new ResponseEntity<>(new ResponseDto(ProfileConstants.STATUS_201, ProfileConstants.MESSAGE_201), HttpStatus.CREATED);
     }
 

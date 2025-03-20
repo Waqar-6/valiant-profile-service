@@ -4,7 +4,7 @@ import com.wfarooq.profile_service.constants.ProfileType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 @Entity
-@PrimaryKeyJoinColumn
+@PrimaryKeyJoinColumn(name = "id")
 public class BreederProfile extends BaseProfile{
     private String kennelName;
     private String website;
