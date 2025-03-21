@@ -109,4 +109,36 @@ public class ProfileServiceImpl implements IProfileService {
         return normalUserProfiles.stream()
                 .map(profile -> ProfileMapper.mapToNormalUserProfileResponse(profile, new NormalUserProfileResponseDto())).toList();
     }
+
+    @Override
+    public boolean updateNormalUserProfile(CreateNormalUserProfileRequest request, UUID profileId) {
+        log.info("Updating normal user profile with the id : {}", profileId);
+        NormalUserProfile normalUserProfile = normalUserRepository.findById(profileId)
+                .orElseThrow(() -> new ResourceNotFoundException("Profile", "id", profileId.toString()));
+
+        ProfileMapper.mapToNormalUserProfile(request, normalUserProfile);
+        normalUserRepository.save(normalUserProfile);
+        log.info("Normal user profile updated and saved with the id : {}", profileId);
+        return true;
+    }
+
+    @Override
+    public boolean updateBreederProfile(CreateBreederProfileRequest request, UUID profileId) {
+        log.info("Updating breeder profile with the id : {}", profileId);
+        BreederProfile breederProfile = breederProfileRepository.findById(profileId)
+                .orElseThrow(() -> new ResourceNotFoundException("Profile", "id", profileId.toString()));
+        ProfileMapper.mapToBreederProfile(request, breederProfile);
+        breederProfileRepository.save(breederProfile);
+        log.info("Breeder profile updated and saved to database with the id : {}", profileId);
+        return true;
+    }
+
+    @Override
+    public boolean deleteProfileById(UUID profileId) {
+        log.info("Delete breeder profile with the id : {}", profileId);
+        BaseProfile profile = profileRepository.findById(profileId).orElseThrow(() -> new ResourceNotFoundException("Profile", "id", profileId.toString()));
+        profileRepository.delete(profile);
+        log.info("Breeder profile deleted from database with the id : {}", profileId);
+        return true;
+    }
 }

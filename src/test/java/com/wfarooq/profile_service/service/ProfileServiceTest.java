@@ -34,7 +34,7 @@ public class ProfileServiceTest {
                 "Pathan", "Khan", "I am Pathan Hello", ProfileType.BASE_PROFILE
         );
 
-        profileService.createBaseProfile(createBaseProfileRequest);
+        profileService.createNormalUserProfile(createBaseProfileRequest);
 
         verify(profileRepository, times(1)).save(any(BaseProfile.class));
 

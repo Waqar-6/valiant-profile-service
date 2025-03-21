@@ -20,4 +20,9 @@ public interface IProfileService {
     BaseProfileResponseDto fetchProfileById (UUID profileId);
     List<BreederProfileResponseDto> fetchAllBreeders ();
     List<NormalUserProfileResponseDto> fetchAllNormalUsers ();
+
+    boolean updateNormalUserProfile (CreateNormalUserProfileRequest request, UUID profileId);
+    boolean updateBreederProfile (CreateBreederProfileRequest request, UUID profileId);
+
+    boolean deleteProfileById (UUID profileId);
 }

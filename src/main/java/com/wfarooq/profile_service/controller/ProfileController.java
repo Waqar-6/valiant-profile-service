@@ -79,4 +79,25 @@ public class ProfileController {
         log.info("Successfully fetched normal user profiles. Total count: {}", profiles.size());
         return new ResponseEntity<>(profiles, HttpStatus.OK);
     }
+
+    @PutMapping("/normalUserProfiles/{profileId}")
+    public ResponseEntity<ResponseDto> updateNormalUserProfile (@Valid @RequestBody CreateNormalUserProfileRequest request, @PathVariable UUID profileId) {
+        boolean isUpdated = profileService.updateNormalUserProfile(request,profileId);
+        return isUpdated ? new ResponseEntity<>(new ResponseDto(ProfileConstants.STATUS_200, ProfileConstants.MESSAGE_200_UPDATE), HttpStatus.OK) :
+                new ResponseEntity<>(new ResponseDto(ProfileConstants.STATUS_417, ProfileConstants.MESSAGE_417_UPDATE), HttpStatus.EXPECTATION_FAILED);
+    }
+
+    @PutMapping("/breederProfiles/{profileId}")
+    public ResponseEntity<ResponseDto> updateBreederProfile (@Valid @RequestBody CreateBreederProfileRequest request, @PathVariable UUID profileId) {
+        boolean isUpdated = profileService.updateBreederProfile(request, profileId);
+        return isUpdated ? new ResponseEntity<>(new ResponseDto(ProfileConstants.STATUS_200, ProfileConstants.MESSAGE_200_UPDATE), HttpStatus.OK) :
+                new ResponseEntity<>(new ResponseDto(ProfileConstants.STATUS_417, ProfileConstants.MESSAGE_417_UPDATE), HttpStatus.EXPECTATION_FAILED);
+    }
+
+    @DeleteMapping("/{profileId}")
+    public ResponseEntity<ResponseDto> deleteProfileById (@PathVariable UUID profileId) {
+        boolean isDeleted = profileService.deleteProfileById(profileId);
+        return isDeleted ? new ResponseEntity<>(new ResponseDto(ProfileConstants.STATUS_200, ProfileConstants.MESSAGE_200_DELETE), HttpStatus.OK) :
+                new ResponseEntity<>(new ResponseDto(ProfileConstants.STATUS_417, ProfileConstants.MESSAGE_417_DELETE), HttpStatus.EXPECTATION_FAILED);
+    }
 }
