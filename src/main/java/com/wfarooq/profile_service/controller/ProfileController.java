@@ -34,7 +34,7 @@ public class ProfileController {
     }
 
     @PostMapping("/normalUserProfile")
-    public ResponseEntity<ResponseDto> createBaseProfile(@Valid @RequestBody CreateNormalUserProfileRequest request) {
+    public ResponseEntity<ResponseDto> createNormalUserProfile(@Valid @RequestBody CreateNormalUserProfileRequest request) {
         log.info("create normal user profile request {}", request);
         profileService.createNormalUserProfile(request);
         log.info("new normal user profile created for user {}", request.getFirstName());

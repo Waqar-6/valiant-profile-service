@@ -1,13 +1,18 @@
 package com.wfarooq.profile_service;
 
 import org.junit.jupiter.api.Test;
+
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+
+@SpringBootTest()
 class ProfileServiceApplicationTests {
+
+
 
 	@Test
 	void contextLoads() {
 	}
+
 
 }
