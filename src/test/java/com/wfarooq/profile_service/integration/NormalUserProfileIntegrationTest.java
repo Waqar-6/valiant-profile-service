@@ -36,6 +36,7 @@ public class NormalUserProfileIntegrationTest {
 
     @LocalServerPort
     private String port;
+
     private String baseUrl;
 
 
