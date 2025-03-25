@@ -1,8 +1,14 @@
 package com.wfarooq.profile_service.dto.requests;
 
 import com.wfarooq.profile_service.constants.ProfileType;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(
+        name = "breederProfile",
+        description = "Schema hold data for a new breeder profile"
+)
 public class CreateBreederProfileRequest extends CreateBaseProfileRequest {
+
     private String kennelName;
     private String website;
 

@@ -1,6 +1,7 @@
 package com.wfarooq.profile_service.dto.requests;
 
 import com.wfarooq.profile_service.constants.ProfileType;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
